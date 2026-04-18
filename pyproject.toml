@@ -1,0 +1,22 @@
+[project]
+name = "myproject"
+version = "0.1.0"
+description = "Toy example of CI/CD in CPython"
+readme = "README.md"
+requires-python = ">=3.12"
+
+[project.optional-dependencies]
+test = [
+    "pytest>=8.0.0",
+]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-q --tb=no"
+testpaths = ["tests"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"

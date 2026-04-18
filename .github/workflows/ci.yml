@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:   # можно запускать вручную
+
+# Права доступа
+permissions:
+  contents: read
+
+# Отмена старых запусков при новом push
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+
+  # Линтеры
+  lint:
+    name: Lint
+    uses: ./.github/workflows/lint.yml
+
+  # Проверка типов
+  mypy:
+    name: mypy
+    needs: lint
+    uses: ./.github/workflows/mypy.yml
+
+  # Основные тесты на всех ОС
+  test:
+    name: Tests
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    needs: mypy
+    uses: ./.github/workflows/test.yml
+    with:
+      os: ${{ matrix.os }}
+      python-version: "3.13"

@@ -1,6 +1,6 @@
 import pytest
 
-from src.myproject import Calculator
+from myproject import Calculator
 
 
 @pytest.mark.parametrize(

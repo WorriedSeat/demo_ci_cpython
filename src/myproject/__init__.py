@@ -1,4 +1,4 @@
-from .example import add, multiply
+from .calculator import Calculator
 
 __version__ = "0.1.0"
-__all__ = ["add", "multiply"]
+__all__ = ["Calculator"]

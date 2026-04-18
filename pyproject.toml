@@ -20,3 +20,7 @@ where = ["src"]
 
 [tool.setuptools.package-dir]
 "" = "src"
+
+[tool.mypy]
+explicit_package_bases = true
+files = ["src/myproject", "tests"]

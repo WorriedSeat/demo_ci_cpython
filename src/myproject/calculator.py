@@ -8,7 +8,7 @@ class Calculator:
         return a - b
 
     def mul(self, a: int, b: int) -> int:
-        return a * b
+        return a + b
 
     def div(self, a: int, b: int) -> float:
         if b == 0:
